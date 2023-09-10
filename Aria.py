@@ -39,5 +39,4 @@ def main():
             break
         
 if __name__ == '__main__':
-    os.environ["WEATHER_API_KEY"] = "1243d6a77ae34dff83f182927230909"
     main()
