@@ -1,10 +1,10 @@
 from Utilities.attempt_request import attempt_request
 import geocoder
-import os
+import json
 
 class Weather:
 
-    __API_KEY = os.environ["WEATHER_API_KEY"]
+    __API_KEY = json.load(f := open('./keys.json'))['WEATHER_API_KEY']
     __BASE_URL = "http://api.weatherapi.com/v1"
 
 # -------------------- Main Functions -------------------- #

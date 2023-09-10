@@ -1,7 +1,8 @@
-from Aria.mouth import TTS_Module
-from Aria.brain import Commands
-from Aria.ears import Listener
+from Body.mouth import TTS_Module
+from Body.brain import Commands
+from Body.ears import Listener
 from Skills.casual_conversation import introduction
+import os
 
 def main():
     
@@ -38,4 +39,5 @@ def main():
             break
         
 if __name__ == '__main__':
+    os.environ["WEATHER_API_KEY"] = "1243d6a77ae34dff83f182927230909"
     main()
