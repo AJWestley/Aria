@@ -1,11 +1,11 @@
 import spacy
 import re
-from weather_finder import Weather
-from quotes import Quoter
-from music import MusicPlayer
-from apps import Appy
-from date_and_time import DateTime
-from lookup import LookUp
+from Skills.weather_finder import Weather
+from Skills.quotes import Quoter
+from Skills.music import MusicPlayer
+from Skills.apps import Appy
+from Skills.date_and_time import DateTime
+from Skills.lookup import LookUp
 
 class Commands:
     

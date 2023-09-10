@@ -1,6 +1,6 @@
 from gtts import gTTS
 from playsound import playsound
-from command_line import outputln
+from Utilities.command_line import outputln
 import os
 
 class TTS_Module:

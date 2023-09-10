@@ -1,4 +1,4 @@
-from attempt_request import attempt_request
+from Utilities.attempt_request import attempt_request
 from random import choice
 
 class Quoter:
