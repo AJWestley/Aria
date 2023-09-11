@@ -29,21 +29,21 @@ Aria can perform a variety of tasks. These tasks include:
 
 ### Chatting to Aria
 
-#### Starting a conversation
-To start a conversation with Aria, you need to call her first! </br>
-To call Aria, simply say ***"Aria"*** in any sentence and she will start listening for instructions.
+- #### Starting a conversation
+  To start a conversation with Aria, you need to call her first! </br>
+  To call Aria, simply say ***"Aria"*** in any sentence and she will start listening for instructions.
 
-#### Ending a conversation
-If you want to end a conversation with Aria, just say ***"nevermind"***. </br>
-This will end the conversation, but she'll still be listening for you to call her again!
+- #### Ending a conversation
+  If you want to end a conversation with Aria, just say ***"nevermind"***. </br>
+  This will end the conversation, but she'll still be listening for you to call her again!
 
-#### Putting Aria to sleep
-Another way you can end a conversation is by saying ***"Go to sleep"***. </br>
-This will shut Aria down completely. She won't listen for you to call her again.
+- #### Putting Aria to sleep
+  Another way you can end a conversation is by saying ***"Go to sleep"***. </br>
+  This will shut Aria down completely. She won't listen for you to call her again.
 
-#### Searching the web
-To search the web, you must use ***"Google"***, ***"Search"***, or ***"Look up"*** in a sentence. </br>
-This will open a Google tab where the rest your sentence is used as the search prompt.
+- #### Searching the web
+  To search the web, you must use ***"Google"***, ***"Search"***, or ***"Look up"*** in a sentence. </br>
+  This will open a Google tab where the rest your sentence is used as the search prompt.
 
 ## Getting Started
 
