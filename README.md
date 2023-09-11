@@ -67,7 +67,6 @@ In order to use them, you will need to generate your own API keys and add them t
 
 ```json
 {
-  // keys.json
   "WEATHER_API_KEY": "key here",
   "OPEN_AI_KEY": "key here"
 }
