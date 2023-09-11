@@ -27,15 +27,28 @@ Aria can perform a variety of tasks. These tasks include:
 - Web Search:
   - Google things for you  
 
+- Chat:
+  - She can chat with you, using GPT 3.5 Turbo
+
 ### Chatting to Aria
 
-- #### Starting a conversation
-  To start a conversation with Aria, you need to call her first! </br>
-  To call Aria, simply say ***"Aria"*** in any sentence and she will start listening for instructions.
+- #### Conversation Modes
+
+  Aria has 2 conversation modes: *task mode* and *chat mode*. 
+
+  - ***Task Mode*** </br>
+    To enter task mode with Aria, you need to call her first! </br>
+    To call Aria, simply say ***"Aria"*** in any sentence and she will start listening for instructions.
+
+  - ***Chat Mode*** </br>
+    If you want to chat with Aria, just say ***"chat"*** in a sentence. </br>
+    I personally prefer to say "Let's chat"!
+
+  If you use both keywords, Aria will enter chat mode.
 
 - #### Ending a conversation
   If you want to end a conversation with Aria, just say ***"nevermind"***. </br>
-  This will end the conversation, but she'll still be listening for you to call her again!
+  This will leave whatever mode she is in, but she'll still be listening for you to call her again!
 
 - #### Putting Aria to sleep
   Another way you can end a conversation is by saying ***"Go to sleep"***. </br>
@@ -46,6 +59,21 @@ Aria can perform a variety of tasks. These tasks include:
   This will open a Google tab where the rest your sentence is used as the search prompt.
 
 ## Getting Started
+
+### API Keys
+
+Some of Arias functionality relies external APIs. 
+In order to use them, you will need to generate your own API keys and add them to *keys.json*.
+
+```json
+{
+    "WEATHER_API_KEY": "key here",
+    "OPEN_AI_KEY": "key here"
+}
+```
+
+The *WEATHER_API_KEY* can be created for free <a href="https://www.weatherapi.com">here</a>. </br>
+The *OPEN_AI_KEY* can be created <a href="https://platform.openai.com">here</a> but you must buy credits before the chat feature can be used.
 
 ### Dependencies
 
