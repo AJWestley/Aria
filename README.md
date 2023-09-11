@@ -67,7 +67,6 @@ In order to use them, you will need to generate your own API keys and add them t
 
 ```json
 {
-  // keys.json
   "WEATHER_API_KEY": "key here",
   "OPEN_AI_KEY": "key here"
 }
@@ -116,3 +115,7 @@ The issue can be fixed in two ways: </br></br>
 - Altering system settings
 - Telling you about anstronomy conditions
 
+### Potential Ideas:
+- Integrating other OpenAI features (DALL-E?)
+- YouTube searching/downloading
+- Changing terminal output to match voice volume
