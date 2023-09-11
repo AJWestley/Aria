@@ -4,7 +4,7 @@ import json
 
 class Weather:
 
-    __API_KEY = json.load(f := open('./keys.json'))['WEATHER_API_KEY']
+    __API_KEY = json.load(f := open('./data/keys.json'))['WEATHER_API_KEY']
     __BASE_URL = "http://api.weatherapi.com/v1"
 
 # -------------------- Main Functions -------------------- #

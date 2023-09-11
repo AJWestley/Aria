@@ -11,7 +11,7 @@ from Skills.lookup import LookUp
 class Commands:
     
     # ----- Constants ----- #
-    constants = json.load(f := open("./Commands/commands.json"))
+    constants = json.load(f := open("./data/commands.json"))
     commands = constants['commands']
     thresholds = constants['thresholds']
     nlp = spacy.load('en_core_web_lg')

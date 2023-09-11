@@ -1,42 +1,62 @@
 from Body.mouth import TTS_Module
 from Body.brain import Commands
 from Body.ears import Listener
-from Skills.casual_conversation import introduction
-import os
+from Skills.conversation import Conversation
+from Utilities.command_line import CmdLine
 
-def main():
-    
-    # Init TTS & greet user
-    speaker = TTS_Module()
-    speaker.speak(introduction())
+class Aria:
+    def __init__(self) -> None:
+        # Init TTS
+        self.speaker = TTS_Module()
+        CmdLine.outputln("...")
 
-    # Begin listening loop
-    while True:
-        
-        # Wait to be called
-        Listener.listen_for('aria')
-        speaker.speak("I'm listening...")
+    def run(self):
 
-        # Begin conversation loop
+        # Begin listening loop
         while True:
             
-            # Listen to instruction
-            instruction = Listener.listen()
+            # Wait to be called
+            convo_type = Listener.listen_for(['chat', 'aria'], ['chat', 'task'])
+            self.speaker.speak("I'm listening...")
 
-            # Check for conversation end
-            if instruction in ['nevermind', 'go to sleep']:
-                speaker.speak("Okay. Let me know when you need anything else")
+            # Chat or perform tasks
+            if convo_type == 'task':
+                instruction = self.do_tasks()
+            elif convo_type == 'chat':
+                instruction = self.chat()
+                
+            # Shut down completely
+            if instruction == 'go to sleep':
                 break
+        
+    def do_tasks(self):
+        # Begin instruction loop
+            while True:
+                instruction = Listener.listen()
+
+                if instruction in ['nevermind', 'go to sleep']:
+                    self.speaker.speak("Okay. Let me know when you need anything else")
+                    return instruction
+                
+                # Understand instruction
+                command, xtra = Commands.parse_command(instruction)
+                
+                # Perform task
+                self.speaker.speak(Commands.execute_command(command, xtra))
+        
+    def chat(self):
+        conversation = Conversation()
+        
+        while True:
+            message = Listener.listen()
             
-            # Understand instruction
-            command, xtra = Commands.parse_command(instruction)
+            if message in ['nevermind', 'go to sleep']:
+                self.speaker.speak("Okay. Let me know when you need anything else")
+                return message
             
-            # Perform task
-            speaker.speak(Commands.execute_command(command, xtra))
-            
-        # Shut down completely
-        if instruction == 'go to sleep':
-            break
+            reply = conversation.get_response(message)
+            self.speaker.speak(reply)
         
 if __name__ == '__main__':
-    main()
+    aria = Aria()
+    aria.run()

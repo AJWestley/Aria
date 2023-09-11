@@ -5,7 +5,7 @@ from Utilities.attempt_request import attempt_request
 
 class DateTime:
 
-    __API_KEY = json.load(f := open('./keys.json'))['WEATHER_API_KEY']
+    __API_KEY = json.load(f := open('./data/keys.json'))['WEATHER_API_KEY']
     __BASE_URL = "http://api.weatherapi.com/v1"
 
     @staticmethod

@@ -1,0 +1,14 @@
+{
+    "settings": [
+        {
+            "role": "system",
+            "content": "You are a helpful AI assistant called Aria."
+        },
+        {
+            "role": "system"
+        }
+    ],
+    "model": "gpt-3.5-turbo",
+    "temperature": 0.9,
+    "max_tokens": 30
+}
