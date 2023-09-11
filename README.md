@@ -115,3 +115,7 @@ The issue can be fixed in two ways: </br></br>
 - Altering system settings
 - Telling you about anstronomy conditions
 
+### Potential Ideas:
+- Integrating other OpenAI features (DALL-E?)
+- YouTube searching/downloading
+- Changing terminal output to match voice volume
