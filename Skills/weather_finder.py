@@ -41,10 +41,10 @@ class Weather:
             'humidity': contents['current']['humidity'],
             'windspeed': contents['current']['wind_kph'],
             'precip': contents['current']['precip_mm'],
-            'clouds': __cloud_percent_to_words(contents['current']['cloud'])
+            'clouds': cloud_percent_to_words(contents['current']['cloud'])
         }
         
-        return __current_details_to_words(details)
+        return current_details_to_words(details)
 
     @staticmethod
     def get_current_weather_specific(field: str, location: str) -> str:
@@ -76,10 +76,10 @@ class Weather:
             'humidity': contents['current']['humidity'],
             'windspeed': contents['current']['wind_kph'],
             'precip': contents['current']['precip_mm'],
-            'clouds': __cloud_percent_to_words(contents['current']['cloud'])
+            'clouds': cloud_percent_to_words(contents['current']['cloud'])
         }
 
-        return __current_weather_condition_to_words(field, details)
+        return current_weather_condition_to_words(field, details)
 
     # ----- Forecasting ----- #
 
@@ -112,11 +112,11 @@ class Weather:
             'max_temp': contents['day']['maxtemp_c'],
             'min_temp': contents['day']['mintemp_c'],
             'avg_temp': contents['day']['avgtemp_c'],
-            'chance_of_rain': __calc_chance_of_rain(contents['hour']),
+            'chance_of_rain': calc_chance_of_rain(contents['hour']),
             'humidity': int(contents['day']['avghumidity']),
-            'clouds': __cloud_percent_to_words(__calc_average_cloud_cover(contents['hour']))
+            'clouds': cloud_percent_to_words(calc_average_cloud_cover(contents['hour']))
         }
-        return __forecast_details_to_words(details, "Tomorrow")
+        return forecast_details_to_words(details, "Tomorrow")
 
     @staticmethod
     def get_weather_forecast_today(location: str) -> str:
@@ -147,11 +147,11 @@ class Weather:
             'max_temp': contents['day']['maxtemp_c'],
             'min_temp': contents['day']['mintemp_c'],
             'avg_temp': contents['day']['avgtemp_c'],
-            'chance_of_rain': __calc_chance_of_rain(contents['hour']),
+            'chance_of_rain': calc_chance_of_rain(contents['hour']),
             'humidity': int(contents['day']['avghumidity']),
-            'clouds': __cloud_percent_to_words(__calc_average_cloud_cover(contents['hour']))
+            'clouds': cloud_percent_to_words(calc_average_cloud_cover(contents['hour']))
         }
-        return __forecast_details_to_words(details, "Today")
+        return forecast_details_to_words(details, "Today")
 
     @staticmethod
     def get_rain(location: str, day: str) -> str:
@@ -179,7 +179,7 @@ class Weather:
         # Successful request
         loc = f"{response.json()['location']['name']}, {response.json()['location']['country']}"
         contents = response.json()['forecast']['forecastday'][d]
-        rain_chance = __calc_chance_of_rain(contents['hour'])
+        rain_chance = calc_chance_of_rain(contents['hour'])
         return f"{day.title()} in {loc}, there is a {rain_chance}% chance of rain."
 
     @staticmethod
@@ -221,19 +221,19 @@ class Weather:
 
 # ----- Weather Calculations ----- #
 
-def __calc_chance_of_rain(hours: list[dict]) -> int:
+def calc_chance_of_rain(hours: list[dict]) -> int:
     chance_no_rain = 1
     for hour in hours:
         chance_no_rain *= (1 - (hour['chance_of_rain'] / 100))
     return int((1 - chance_no_rain) * 100)
 
-def __calc_average_cloud_cover(hours: list[dict]) -> int:
+def calc_average_cloud_cover(hours: list[dict]) -> int:
     return sum(hour['cloud'] for hour in hours) // len(hours)
     
 
 # ----- Translate To Words ----- #
 
-def __cloud_percent_to_words(coverage: int) -> str:
+def cloud_percent_to_words(coverage: int) -> str:
     if coverage is None: 
         return None
 
@@ -247,7 +247,7 @@ def __cloud_percent_to_words(coverage: int) -> str:
         return "fair skies"
     return "clear skies"
 
-def __current_details_to_words(details: dict) -> str:
+def current_details_to_words(details: dict) -> str:
     output = f"In {details['location']} it is currently {details['temperature']} degrees celcius"
     output += f", but it feels like it's {details['feels_like']} degrees." if details['feels_like'] else "."
     output += f" It is {details['clouds']}"
@@ -256,7 +256,7 @@ def __current_details_to_words(details: dict) -> str:
     output += f", and the average windspeed is {details['windspeed']} kilometers per hour." if details['windspeed'] else "."
     return output
 
-def __forecast_details_to_words(details: dict, day: str) -> str:
+def forecast_details_to_words(details: dict, day: str) -> str:
     output = f"{day} in {details['location']}, the average temperature will be {details['avg_temp']} degrees celcius, "
     output += f"with a low of {details['min_temp']} and a high of {details['max_temp']}. "
     output += f"The average humidity will be {details['humidity']}%, "
@@ -265,7 +265,7 @@ def __forecast_details_to_words(details: dict, day: str) -> str:
         output = output.replace('will be', 'is')
     return output
 
-def __current_weather_condition_to_words(field: str, details: dict) -> str:
+def current_weather_condition_to_words(field: str, details: dict) -> str:
     if field not in details:
         return "Sorry, I can't find the field you're looking for."
     
