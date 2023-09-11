@@ -2,13 +2,23 @@
     "settings": [
         {
             "role": "system",
-            "content": "You are a helpful AI assistant called Aria."
+            "content": "You are a helpful, voice-based AI assistant called Aria."
         },
         {
-            "role": "system"
+            "role": "system",
+            "content": "Keep answers concise, but have a casual tone like we're friends."
+        },
+        {
+            "role": "system",
+            "content": "Have opinions on topics."
         }
     ],
     "model": "gpt-3.5-turbo",
-    "temperature": 0.9,
-    "max_tokens": 30
+    "temperature": 0.8,
+    "max_tokens": 100,
+    "default_replies": [
+        "What's on your mind?",
+        "What's up?",
+        "I'm listening..."
+    ]
 }

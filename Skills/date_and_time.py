@@ -5,14 +5,28 @@ from Utilities.attempt_request import attempt_request
 
 class DateTime:
 
-    __API_KEY = json.load(f := open('./data/keys.json'))['WEATHER_API_KEY']
-    __BASE_URL = "http://api.weatherapi.com/v1"
+    __API_KEY = None
+    __BASE_URL = None
+    __INITIALIZED = False
+    
+    @staticmethod
+    def init():
+        try:
+            DateTime.__API_KEY = json.load(f := open('./data/keys.json'))['WEATHER_API_KEY']
+            DateTime.__BASE_URL = "http://api.weatherapi.com/v1"
+            DateTime.__INITIALIZED = True
+        except Exception:
+            DateTime.__INITIALIZED = False
 
     @staticmethod
     def get_time(location: str):
+        
         if location == 'local':
             time = datetime.now()
             return f" It is {time.strftime('%H:%M')}."
+        
+        if not DateTime.__INITIALIZED:
+            return "I'm sorry, my timezone service is not working at the moment."
         
         url = f"{DateTime.__BASE_URL}/current.json?key={DateTime.__API_KEY}&q={location}"
         response = attempt_request(url)

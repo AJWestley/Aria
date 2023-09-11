@@ -11,16 +11,29 @@ from Skills.lookup import LookUp
 class Commands:
     
     # ----- Constants ----- #
-    constants = json.load(f := open("./data/commands.json"))
-    commands = constants['commands']
-    thresholds = constants['thresholds']
-    nlp = spacy.load('en_core_web_lg')
+    commands = None
+    thresholds = None
+    nlp = None
+    __INITIALIZED = False
     
     
     # ----- Methods ----- #
+    @staticmethod
+    def init():
+        Weather.init()
+        DateTime.init()
+        
+        try:
+            constants = json.load(open("./data/commands.json"))
+            Commands.commands = constants['commands']
+            Commands.thresholds = constants['thresholds']
+            Commands.nlp = spacy.load('en_core_web_lg')
+            Commands.__INITIALIZED = True
+        except Exception:
+            Commands.__INITIALIZED = False
     
     @staticmethod
-    def most_similar(text: str, bias: str):
+    def __most_similar(text: str, bias: str):
         text_nlp = Commands.nlp(text)
         max_sim = 0
         max_key = None
@@ -46,6 +59,8 @@ class Commands:
     
     @staticmethod
     def parse_command(text: str):
+        if not Commands.__INITIALIZED:
+            return None, None
         
         # Calculate biases
         bias = None
@@ -58,7 +73,7 @@ class Commands:
         elif 'music' in text:
             bias = 'MUSIC' 
 
-        command = Commands.most_similar(text, bias)
+        command = Commands.__most_similar(text, bias)
         extra = None
 
         if ('WEATHER' in command or 'TIME' in command):
@@ -79,6 +94,8 @@ class Commands:
     
     @staticmethod
     def execute_command(command: str, extra):  # sourcery skip: low-code-quality
+        if not Commands.__INITIALIZED:
+            return "I'm sorry. I seem to be unable to process your instruction this moment."
         
         location = extra if ('WEATHER' in command or 'TIME' in command) else None
         app = extra if 'APP' in command else None

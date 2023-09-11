@@ -4,15 +4,27 @@ import json
 
 class Weather:
 
-    __API_KEY = json.load(f := open('./data/keys.json'))['WEATHER_API_KEY']
-    __BASE_URL = "http://api.weatherapi.com/v1"
+    __API_KEY = None
+    __BASE_URL = None
+    __INITIALIZED = False
 
 # -------------------- Main Functions -------------------- #
+
+    @staticmethod
+    def init():
+        try:
+            Weather.__API_KEY = json.load(f := open('./data/keys.json'))['WEATHER_API_KEY']
+            Weather.__BASE_URL = "http://api.weatherapi.com/v1"
+            Weather.__INITIALIZED = True
+        except Exception:
+            Weather.__INITIALIZED = False
 
 # ----- Current Weather ----- #
 
     @staticmethod
     def get_current_weather_overview(location: str) -> str:
+        if not Weather.__INITIALIZED:
+            return "I'm sorry, my weather service is not working at the moment."
         
         if location == 'local':
             g = geocoder.ip('me')
@@ -27,9 +39,6 @@ class Weather:
         
         # Received error code
         if response.status_code != 200:
-            error_code = response.json()['error']['code']
-            if error_code == 1006:
-                return "I'm sorry, I could not find the location you asked for."
             return "I'm sorry, I'm running into some issues finding the weather conditions."
         
         # Successful request
@@ -48,6 +57,8 @@ class Weather:
 
     @staticmethod
     def get_current_weather_specific(field: str, location: str) -> str:
+        if not Weather.__INITIALIZED:
+            return "I'm sorry, my weather service is not working at the moment."
         
         if location == 'local':
             g = geocoder.ip('me')
@@ -85,6 +96,8 @@ class Weather:
 
     @staticmethod
     def get_weather_forecast_tomorrow(location: str) -> str:
+        if not Weather.__INITIALIZED:
+            return "I'm sorry, my weather service is not working at the moment."
         
         if location == 'local':
             g = geocoder.ip('me')
@@ -120,6 +133,8 @@ class Weather:
 
     @staticmethod
     def get_weather_forecast_today(location: str) -> str:
+        if not Weather.__INITIALIZED:
+            return "I'm sorry, my weather service is not working at the moment."
         
         if location == 'local':
             g = geocoder.ip('me')
@@ -155,6 +170,8 @@ class Weather:
 
     @staticmethod
     def get_rain(location: str, day: str) -> str:
+        if not Weather.__INITIALIZED:
+            return "I'm sorry, my weather service is not working at the moment."
         
         d = 0 if day.lower() == 'today' else 1
         
@@ -184,6 +201,8 @@ class Weather:
 
     @staticmethod
     def get_temp(location: str, day: str) -> str:
+        if not Weather.__INITIALIZED:
+            return "I'm sorry, my weather service is not working at the moment."
         
         d = 0 if day.lower() == 'today' else 1
         

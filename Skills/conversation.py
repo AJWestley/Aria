@@ -11,8 +11,7 @@ class Conversation:
             self.messages.append({'role': 'user', 'content': prompt})
             completion = openai.ChatCompletion.create(
                 model=self.model, 
-                messages=self.messages, 
-                temperature=self.temperature, 
+                messages=self.messages,
                 max_tokens=self.max_tokens
             )
             self.messages.append(completion.choices[0]['message'])
