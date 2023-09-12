@@ -1,4 +1,4 @@
 {
-    "WEATHER_API_KEY": "1243d6a77ae34dff83f182927230909",
-    "OPEN_AI_KEY": "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"
+    "WEATHER_API_KEY": "<key here>",
+    "OPEN_AI_KEY": "<key here>"
 }
