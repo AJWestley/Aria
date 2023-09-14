@@ -1,26 +1,31 @@
+'''Aria's text-to-speech functionality'''
+
+import os
 from gtts import gTTS
 from playsound import playsound
 from Utilities.command_line import CmdLine
-import os
 
-class TTS_Module:
-    
+class TTSModule:
+    '''Object class which allows for speaking'''
+
     def __init__(self):
-        pass
-    
+        self.__fname = 'speech.mp3'
+
     def speak(self, words: str):
-        
+        '''Speaks text aloud'''
+
         CmdLine.outputln('...')
-        fname = 'speech.mp3'
-        
+
         try:
             speech = gTTS(words, tld='ca', lang='en')
-            speech.save(fname)
+            speech.save(self.__fname)
         except Exception:
-            CmdLine.outputln(f"{words}\n\nSomething has gone wrong with my voice module!\nAre you connected to the internet?")
-            os.remove(fname)
+            CmdLine.outputln(f"{words}\n\n\
+                Something has gone wrong with my voice module!\n\
+                Are you connected to the internet?")
+            os.remove(self.__fname)
             return
-        
+
         CmdLine.outputln(words)
-        playsound(fname)
-        os.remove(fname)
+        playsound(self.__fname)
+        os.remove(self.__fname)
